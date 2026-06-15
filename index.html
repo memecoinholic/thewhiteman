@@ -1,0 +1,660 @@
+<!DOCTYPE hThe White Man</title>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <style>
+      body {
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.2s ease 0.2s,
+          visibility 0.2s ease 0.2s;
+      }
+
+      .loaded body {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* Music Toggle Premium Styles */
+      #music-toggle {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        width: 50px;
+        height: 50px;
+        background: rgba(254, 248, 163, 0.9); /* Theme yellow */
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 9999;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        border: 2px solid #000;
+        transition: all 0.3s ease;
+      }
+
+      #music-toggle:hover {
+        transform: scale(1.1);
+        background: #FEF8A3;
+      }
+
+      #music-toggle.playing {
+        animation: pulse-music 2s infinite;
+      }
+
+      #music-toggle svg {
+        width: 20px;
+        height: 20px;
+        fill: #000;
+      }
+
+      #music-toggle .pause-icon {
+        display: none;
+      }
+
+      #music-toggle.playing .play-icon {
+        display: none;
+      }
+
+      #music-toggle.playing .pause-icon {
+        display: block;
+      }
+
+      @keyframes pulse-music {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(254, 248, 163, 0.7); }
+        70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(254, 248, 163, 0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(254, 248, 163, 0); }
+      }
+
+      @media (max-width: 767px) {
+        #music-toggle {
+          bottom: 20px;
+          right: 20px;
+          width: 45px;
+          height: 45px;
+        }
+      }
+
+      /* Splash Screen Styles */
+      #entry-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #0d0d0d;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.8s ease, visibility 0.8s ease;
+        overflow: hidden;
+      }
+
+      #entry-overlay.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      #entry-overlay .overlay-content {
+        text-align: center;
+        color: #FEF8A3;
+        z-index: 1;
+      }
+
+      #entry-overlay .overlay-logo {
+        width: 180px;
+        margin-bottom: 20px;
+        animation: float-logo 3s ease-in-out infinite;
+      }
+
+      #entry-overlay h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        font-family: inherit;
+      }
+
+      #entry-overlay .enter-btn {
+        background: #FEF8A3;
+        color: #000;
+        border: 2px solid #000;
+        padding: 18px 50px;
+        font-size: 1.4rem;
+        font-weight: 800;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        text-transform: uppercase;
+        box-shadow: 0 0 20px rgba(254, 248, 163, 0.3);
+      }
+
+      #entry-overlay .enter-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 40px rgba(254, 248, 163, 0.6);
+      }
+
+      #entry-overlay .overlay-bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url('images/back.jpg') center/cover no-repeat;
+        filter: blur(8px) brightness(0.3);
+        transform: scale(1.1);
+      }
+
+      @keyframes float-logo {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(5deg); }
+      }
+    </style>
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="shortcut icon" href="images/11.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+
+  <body>
+    <!-- Splash Screen Entry -->
+    <div id="entry-overlay">
+      <div class="overlay-bg"></div>
+      <div class="overlay-content">
+        <img src="images/logo.png" alt="Logo" class="overlay-logo">
+        <h2>Welcome to the White house</h2>
+        <button type="button" class="enter-btn" id="enter-btn">Click to Enter</button>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div class="menu-open-bg"></div>
+      <header class="header">
+        <div class="header__container">
+          <a href="../" class="header__logo"><img src="images/logo.png" alt="Logo"></a>
+          <div class="header__right">
+            <div class="header__menu menu">
+              <button type="button" class="menu__icon icon-menu">
+                <span></span>
+              </button>
+              <nav class="menu__body">
+                <ul class="menu__list">
+                  <li class="menu__item">
+                    <a href="#" data-goto=".story" class="menu__link"><span>About</span>
+                    </a>
+                  </li>
+                  <li class="menu__item">
+                    <a href="#" data-goto=".how" class="menu__link"><span>How to buy?</span>
+                    </a>
+                  </li>
+                  <li class="menu__item">
+                    <a href="#" data-goto=".exchanges" class="menu__link"><span>Exchanges</span>
+                    </a>
+                  </li>
+                  <li class="menu__item">
+                    <a href="#" data-goto=".tokenomics" class="menu__link"><span>Tokenomics</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <a href="https://pump.fun" target="_blank" class="header__button" data-da=".menu__body, 991.98">
+              <span>Buy now!</span>
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <main class="page">
+        <section class="page__hero hero">
+          <div class="hero__bg">
+            <img src="images/back.jpg" alt="Image">
+          </div>
+          <h1 class="hero__title">
+            <img src="images/title.png" alt="METEORID">
+          </h1>
+          <div class="hero__front">
+            <img src="images/front_1.png" alt="Image">
+          </div>
+          <div class="hero__container">
+            <div class="hero__label">
+              <img src="images/text.png" alt="theletter">
+            </div>
+            <div class="hero__dog">
+              <img src="images/dog.png" alt="Dog">
+            </div>
+            <div class="hero__actions">
+              <a href="https://pump.fun" target="_blank" class="hero__button">
+                <img src="images/buyNowButton.png" alt="Buy Now">
+              </a>
+              <div class="hero__social">
+                <!-- <a
+                  href="https://t.me/whitemancoin"
+                  target="_blank"
+                  class="hero__social-item"
+                >
+                  <img src="img/Telegram.svg" alt="Telegram" />
+                </a> -->
+                <a href="https://x.com/whitemancoin" target="_blank" class="hero__social-item">
+                  <img src="images/X.svg" alt="X">
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="page__story story">
+          <div class="story__container">
+            <h2 class="story__title">
+              <img src="images/title_1.png" alt="The story Of Meteorid">
+              <img src="images/titleCircle.png" alt="Decor Item">
+              <img src="images/titleDec2.png" alt="Decor Item">
+              <img src="images/titleDec11.png" alt="Decor Item">
+              <img src="images/titleDec5.png" alt="Decor Item">
+              <img src="images/titleDec8.png" alt="Decor Item">
+              <img src="images/titleDec13.png" alt="Decor Item">
+              <img src="images/titleDec1.png" alt="Decor Item">
+              <img src="images/titleDec3.png" alt="Decor Item">
+              <img src="images/titleDec4.png" alt="Decor Item">
+              <img src="images/titleDec7.png" alt="Decor Item">
+              <img src="images/titleDec6.png" alt="Decor Item">
+              <img src="images/titleDec9.png" alt="Decor Item">
+              <img src="images/titleDec12.png" alt="Decor Item">
+              <img src="images/titleDec10.png" alt="Decor Item">
+            </h2>
+            <div class="story__rows">
+              <div class="story__row">
+                <div class="story__image" data-prlx-parent="" data-watch-threshold="0.35" data-watch-once="" data-watch="">
+                  <img loading="lazy" data-prlx="" src="images/whoImage.png" alt="Image">
+                </div>
+                <div class="story__content" data-watch-threshold="0.75" data-watch-once="" data-watch="">
+                  <h3 class="story__content-title">
+                    <img loading="lazy" src="images/whoTitle.png" alt="Who's Meteorid">
+                  </h3>
+                  <div class="story__content-text">
+                    <p>
+                      A mysterious figure standing among the world's most powerful leaders. Known for his pale appearance, silent presence, and unexplained influence, THE WHITE MAN doesn't seek power like others — he simply appears... and history changes.
+
+                    </p>
+                  </div>
+                  <a href="https://pump.fun" target="_blank" class="story__content-button">
+                    <img loading="lazy" src="images/BuyNowBtn.png" alt="Buy Now">
+                  </a>
+                </div>
+              </div>
+              <div class="story__row reverse">
+                <div class="story__image pad-top" data-prlx-parent="" data-watch-threshold="0.35" data-watch-once="" data-watch="">
+                  <img loading="lazy" data-prlx="" src="images/originImage.png" alt="Image">
+                </div>
+                <div class="story__content" data-watch-threshold="0.75" data-watch-once="" data-watch="">
+                  <h3 class="story__content-title margin">
+                    <img loading="lazy" src="images/originTitle.png" alt="Origin">
+                  </h3>
+                  <div class="story__content-text">
+                    <p>
+                      THE WHITE MAN appeared without warning, standing silently among the world's most powerful leaders. No roadmap shaped his rise — only presence. Today, he remains one of the internet's most mysterious and iconic figures. 🤍
+
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="story__row">
+                <div class="story__image" data-prlx-parent="" data-watch-threshold="0.35" data-watch-once="" data-watch="">
+                  <img loading="lazy" data-prlx="" src="images/futureImage.png" alt="Image">
+                </div>
+                <div class="story__content" data-watch-threshold="0.75" data-watch-once="" data-watch="">
+                  <h3 class="story__content-title">
+                    <img loading="lazy" src="images/futureTitle.png" alt="The Future">
+                  </h3>
+                  <div class="story__content-text">
+                    <p>
+                     The future of THE WHITE MAN belongs to those who embrace the mystery and spread the legend across the internet.
+No roadmap. No leaders. Just a community carrying the myth forward. 🤍
+                    </p>
+                    <p>
+                      Through memes, mystery, and pure presence, we make sure the world doesn't just notice THE WHITE MAN...
+they remember him. 🤍
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="page__exchanges exchanges">
+          <div class="exchanges__top">
+            <div class="exchanges__decor" data-watch-threshold="0.95" data-watch-once="" data-watch="">
+              <img loading="lazy" src="images/decor.png" alt="Image">
+            </div>
+            <h2 class="exchanges__title">
+              <img loading="lazy" src="images/title_2.png" alt="Exchanges">
+            </h2>
+            <div class="exchanges__front">
+              <img loading="lazy" src="images/front.png" alt="Image">
+              <img loading="lazy" src="images/front-mob.png" alt="Image">
+            </div>
+          </div>
+          <div class="exchanges__bottom">
+            <div class="exchanges__line">
+              <div class="exchanges__line-row">
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/01.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/02.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/03.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/04.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/05.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/06.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/07.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/08.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/09.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/10.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/11.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/12.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/13.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/14.png" alt="Logo">
+                </a>
+              </div>
+              <div class="exchanges__line-row">
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/01.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/02.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/03.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/04.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/05.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/06.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/07.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/08.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/09.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/10.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/11.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/12.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/13.png" alt="Logo">
+                </a>
+                <a href="" target="_blank" class="exchanges__line-item">
+                  <img src="images/14.png" alt="Logo">
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="page__how how">
+          <div class="how__container">
+            <div class="how__content">
+              <h2 class="how__title" data-watch-threshold="0.8" data-watch-once="" data-watch="">
+                <img loading="lazy" src="images/HowToBuyTitle.png" alt="HOW TO BUY">
+              </h2>
+              <ul class="how__items">
+                <li class="how__item" data-watch-threshold="0.8" data-watch-once="" data-watch="">
+                  <div class="how__item-number">
+                    <img loading="lazy" src="images/1.png" alt="1">
+                  </div>
+                  <div class="how__item-content">
+                    <h4>create A WALLET</h4>
+                    <p>
+                      Download the Phantom or Solflare extension from the
+                      official website and install it in your browser. Fund it
+                      by transferring SOL from an exchange or another wallet.
+                    </p>
+                  </div>
+                </li>
+                <li class="how__item" data-watch-threshold="0.8" data-watch-once="" data-watch="">
+                  <div class="how__item-number">
+                    <img loading="lazy" src="images/2.png" alt="2">
+                  </div>
+                  <div class="how__item-content">
+                    <h4>connect to dex</h4>
+                    <p>
+                      Connect to a decentralized exchange (DEX) like Raydium,
+                      Pumpswap. Open the DEX website and click on "Connect
+                      Wallet".Then select Phantom or Solflare
+                    </p>
+                  </div>
+                </li>
+                <li class="how__item" data-watch-threshold="0.8" data-watch-once="" data-watch="">
+                  <div class="how__item-number">
+                    <img loading="lazy" src="images/3.png" alt="3">
+                  </div>
+                  <div class="how__item-content">
+                    <h4>swap SOL for $WHITEMAN</h4>
+                    <p>
+                      To swap SOL for WHITEMAN, select SOL in the “from” field
+and choose WHITEMAN in the “to” field using the contract address.
+Enter the amount you want… and get ready for impact. ☄️
+
+                    </p>
+                  </div>
+                </li>
+                <li class="how__item" data-watch-threshold="0.8" data-watch-once="" data-watch="">
+                  <div class="how__item-number">
+                    <img loading="lazy" src="images/4.png" alt="4">
+                  </div>
+                  <div class="how__item-content">
+                    <h4>verify & manage tokens</h4>
+                    <p>
+                      Verify your transaction status in Phantom or Solflare
+                      under the "Activity" tab or on Solscan using your wallet
+                      address. You import the token to your Phantom or Solflare
+                      by pasting in the CA.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="how__image" data-prlx-parent="" data-watch-threshold="0.35" data-watch-once="" data-watch="">
+              <img loading="lazy" data-prlx="" src="images/image.png" alt="Image">
+            </div>
+          </div>
+        </section>
+        <section class="page__tokenomics tokenomics">
+          <div class="tokenomics__container">
+            <h2 class="tokenomics__title">
+              <img loading="lazy" src="images/title_3.png" alt="tokenomics">
+              <img loading="lazy" src="images/titleDec.png" alt="tokenomics">
+              <img loading="lazy" src="images/titleDecor2.png" alt="tokenomics">
+            </h2>
+            <div class="tokenomics__body">
+              <div class="tokenomics__items" data-watch-threshold="0.65" data-watch-once="" data-watch="">
+                <div class="tokenomics__item" data-watch-threshold="0.65" data-watch-once="" data-watch="">
+                  <img loading="lazy" src="images/tok1.png" alt="Image">
+                </div>
+                <div class="tokenomics__item" data-watch-threshold="0.65" data-watch-once="" data-watch="">
+                  <img loading="lazy" src="images/tok2.png" alt="Image">
+                </div>
+                <div class="tokenomics__item" data-watch-threshold="0.65" data-watch-once="" data-watch="">
+                  <img loading="lazy" src="images/tok3.png" alt="Image">
+                </div>
+              </div>
+              <div class="tokenomics__ca">
+                <span>
+                  <img loading="lazy" src="images/ca.png" alt="CA">
+                </span>
+                <span>0000000000000000000</span>
+                <button type="button" class="copy-ca-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="29" height="33" viewBox="0 0 29 33" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M28.2009 0.595703H5.3178V5.81148H0.799316V32.4052H23.1502V28.2323H28.2009V0.595703ZM23.1502 25.3644H25.2739V3.46365H8.2447V5.81148H23.1502V25.3644ZM3.72622 29.5372V8.67943H20.2233V29.5372H3.72622Z" fill="#FEF8A3"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="page__join join">
+          <div class="join__bg">
+            <img loading="lazy" src="images/bg.jpg" alt="Image">
+          </div>
+          <div class="join__container">
+            <h2 class="join__title">
+              <img loading="lazy" src="images/title_4.png" alt="JOIN METEORID">
+            </h2>
+            <div class="join__actions">
+              <a href="https://pump.fun" target="_blank" class="join__button">
+                <img src="images/buy.png" alt="Buy Now">
+              </a>
+              <div class="join__social">
+                <!-- <a
+                  href="https://t.me/whitemancoin"
+                  target="_blank"
+                  class="join__social-item"
+                >
+                  <img src="img/join/01.svg" alt="Telegram" />
+                </a> -->
+                <a href="https://x.com/whitemancoin" target="_blank" class="join__social-item">
+                  <img src="images/02.svg" alt="X">
+                </a>
+                <a href="https://dexscreener.com" target="_blank" class="join__social-item">
+                  <img src="images/03.svg" alt="DexS">
+                </a>
+                <!-- <a
+                  href="https://pump.fun"
+                  target="_blank"
+                  class="join__social-item"
+                >
+                  <img src="img/join/04.svg" alt="Uniswap" />
+                </a> -->
+                <a href="https://t.me/whitemancoin" target="_blank" class="join__social-item">
+                  <img src="images/05.svg" alt="DexT">
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="join__front">
+            <img loading="lazy" src="images/front_2.png" alt="Image">
+            <img loading="lazy" src="images/dog_1.png" alt="Dog">
+          </div>
+        </section>
+      </main>
+      <footer class="footer">
+        <div class="footer__top">
+          <div class="footer__container">
+            <div class="footer__top-body">
+              <div class="footer__top-menu">
+                <div class="footer__top-menu-column">
+                  <a href="#" data-goto=".story" class="footer__top-menu-item">
+                    <img src="images/about.png" alt="About">
+                  </a>
+                  <a href="#" data-goto=".how" class="footer__top-menu-item">
+                    <img src="images/ex.png" alt="Exchanges">
+                  </a>
+                </div>
+                <div class="footer__top-menu-column">
+                  <a href="#" data-goto=".how" class="footer__top-menu-item">
+                    <img src="images/how.png" alt="How to buy?">
+                  </a>
+                  <a href="#" data-goto=".tokenomics" class="footer__top-menu-item">
+                    <img src="images/tok.png" alt="Tokenomics">
+                  </a>
+                </div>
+              </div>
+              <div class="footer__top-social">
+                <!-- <a
+                  href="https://t.me/meteoridsol"
+                  target="_blank"
+                  class="footer__top-social-item"
+                >
+                  <img src="img/footer/01.svg" alt="Tel" />
+                </a> -->
+                <a href="https://x.com/whitemancoin" target="_blank" class="footer__top-social-item">
+                  <img src="images/02_1.svg" alt="X">
+                </a>
+                <!-- <a
+                  href="https://pump.fun"
+                  target="_blank"
+                  class="footer__top-social-item"
+                >
+                  <img src="img/footer/03.svg" alt="Un" />
+                </a> -->
+                <a href="https://t.me/whitemancoin" target="_blank" class="footer__top-social-item">
+                  <img src="images/04.svg" alt="DexT">
+                </a>
+                <a href="https://dexscreener.com" target="_blank" class="footer__top-social-item">
+                  <img src="images/05_1.svg" alt="DexS">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <div class="footer__container">
+            <div class="footer__body">
+              <span>2026 © ALL RIGHTS RESERVED</span>
+              <a target="_blank" href="">
+                <span>Designed by</span>
+                <!-- <img src="img/footer/osnovo.svg" alt="Osnovo Logo" /> -->
+                <span>Whiteman</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- Background Music -->
+    <audio id="bg-music" loop preload="auto">
+      <source src="audio/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Toggle Button -->
+    <div id="music-toggle" title="Play/Pause Music">
+      <svg class="play-icon" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+      <svg class="pause-icon" viewBox="0 0 24 24">
+        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+      </svg>
+    </div>
+
+    <script src="js/audio_control.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/demo.js"></script>
+  
+
+</body></html>
